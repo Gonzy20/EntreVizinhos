@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "../components/Header";
+import Link from "next/link";
+import { AiOutlineHome } from "react-icons/ai";
+import { FaBook } from "react-icons/fa"
+import { IoMdAdd } from "react-icons/io";
+import { GrInProgress } from "react-icons/gr";
+import { CgProfile } from "react-icons/cg";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +34,54 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header />
+        <div className="body-container">
+          <div className="side-bar">
+            <nav className="side-menu">
+              <ul>
+                <li>
+                  <Link href="/">
+                    <AiOutlineHome className="icon" />
+                    <span>Página Principal</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/criar-pedido">
+                    <IoMdAdd className="icon" />
+                    <span>Criar Pedido</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/pedidos-em-progresso">
+                    <GrInProgress className="icon" />
+                    <span>Pedidos em Progresso</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/historico">
+                    <FaBook className="icon" />
+                    <span>Histórico</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link href="/perfil">
+                    <CgProfile className="icon" />
+                    <span>Perfil</span>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="flex-1">
+            {children}
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

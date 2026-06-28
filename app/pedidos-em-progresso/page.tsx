@@ -2,6 +2,7 @@
 
 // Importa hooks do React
 import { useEffect, useState } from "react";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 // Importa Link para navegação entre páginas
 import Link from "next/link";
@@ -55,28 +56,37 @@ export default function PedidosEmProgresso() {
 
   return (
     <>
-      {/* Cabeçalho da aplicação */}
-      <Header />
 
       <main className="pedidos-progresso-page">
         {/* Topo da página */}
-        <section className="pagina-topo">
-          <h1>Pedidos em Progresso</h1>
+        <section className="home-top">
+          <h1 className="morada-box">Pedidos em Progresso</h1>
 
           {/* Botão para voltar ao feed principal */}
-          <Link href="/" className="voltar-btn">
+          <Link href="/" className="criar-pedido-btn">
+            <IoArrowBackOutline className="icon-add"/>
             Voltar ao feed
           </Link>
         </section>
 
         {/* Lista de pedidos */}
-        <section className="pedidos-lista">
+        <section className="filtro-box">
+          <div className="pedidos-header">
+            <label>Pedidos em Progresso</label>
+            <text className="pedidos-contagem">{pedidos.length}</text>
+          </div>
           {/* 
             Se não existirem pedidos em progresso,
             mostra esta mensagem.
           */}
           {pedidos.length === 0 && (
-            <p>Não existem pedidos em progresso.</p>
+            <div className="sem-pedidos">
+              <div className="sem-pedidos-img">
+                <img src="/Sem_pedidos.svg" alt="Sem pedidos" />
+              </div> 
+              <label>Não existem pedidos em progresso.</label>
+              <text>Quando pedidos ficarem em progresso, eles aparecerão aqui.</text>
+            </div>
           )}
 
           {/* 

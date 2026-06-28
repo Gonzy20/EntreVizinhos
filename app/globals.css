@@ -1,13 +1,34 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  background-color: #fcfcfc;
   color: #111;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
+.body-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-bar {
+  background-color: #ffffff;
+  border-right: 1px solid #d4d4d4;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 260px;
+  list-style: none;
+}
+
 .header {
-  height: 52px;
-  background-color: #22a832;
+  height: 64px;
+  background-color: rgb(34, 139, 34);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,9 +37,14 @@ body {
 }
 
 .header h1 {
-  font-size: 20px;
-  font-weight: normal;
+  font-size: 1.5em;
+  font-family: Verdana, sans-serif;
+  color: white;
+  font-weight: 500;
+  height: 52px;
   margin: 0;
+  align-items: center;
+  display: flex;
 }
 
 .menu-button,
@@ -26,8 +52,10 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: black;
+  color: rgb(255, 255, 255);
   text-decoration: none;
+  padding: 0;
+  height: 32px;
 }
 
 .menu-button {
@@ -39,28 +67,48 @@ body {
   font-size: 32px;
 }
 
-.side-menu {
-  position: fixed;
-  top: 52px;
-  left: 0;
-  width: 150px;
-  background-color: #f5f5f5;
-  border-right: 1px solid #bdbdbd;
-  z-index: 10;
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.logo {
+  font-size: 25px;
+  color: white;
+}
+
+ul {
+  padding-top: 32px;
+  padding-left: 0px;
+}
+
+li {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 6px;
 }
 
 .side-menu a {
-  display: block;
-  padding: 10px 8px;
-  text-align: center;
+  display: flex;
   text-decoration: none;
-  color: black;
-  border-bottom: 1px solid #b7e1b7;
-  font-size: 15px;
+  align-items: center;
+  border-radius: 5px;
+  padding: 14px;
+  text-align: left;
+  color: #6d6d6d;
+  font-weight: 550;
+  width: 100%;
+  padding-right: 12px;
 }
 
 .side-menu a:hover {
-  background-color: #e0e0e0;
+  background-color: rgba(158, 247, 168, 0.2);
 }
 
 .home-page {
@@ -72,28 +120,63 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
+  margin-top: 18px;
 }
 
-.morada-box {
-  background-color: #ddd;
-  padding: 8px 14px;
+.home-top h1{
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.home-top text {
+  color: rgb(107, 107, 107);
+}
+
+.icon-add {
+  margin-right: 6px;
+  font-size: 20px;
 }
 
 .criar-pedido-btn {
-  background-color: #22a832;
+  display: flex;
+  align-items: center;
+  background-color: rgb(34, 139, 34);
+  border-radius: 8px;
   color: white;
   text-decoration: none;
-  padding: 9px 14px;
-  border-radius: 18px;
+  padding: 12px 24px;
 }
 
 .filtro-box {
-  background-color: #ddd;
-  padding: 12px;
+  margin-top: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 16px 16px 32px 16px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.filtro-box-2 {
+  margin-top: 24px;
+  background-color: rgba(158, 247, 168, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filtro-box label {
+  font-size: 15px;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
 }
 
 .filtro-box select {
@@ -101,6 +184,51 @@ body {
   box-sizing: border-box;
   padding: 8px;
   border: none;
+}
+
+.filtro-box input {
+  width: 100%;
+  border: none;
+}
+
+.filtro-box input:focus{
+  outline: none;
+}
+
+.filtro-box-2 label {
+  font-size: 15px;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
+}
+
+.filtro-box-2 select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: none;
+}
+
+.filtro-box-2 input {
+  width: 100%;
+  border: none;
+}
+
+.filtro-box-2 input:focus{
+  outline: none;
+}
+
+.pesquisa-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 8px;
 }
 
 .pedidos-lista {
@@ -111,8 +239,8 @@ body {
 
 .pedido-card {
   border-radius: 25px;
-  background-color: #65bd68;
-  color: white;
+  background-color: rgba(158, 247, 168, 0.2);
+  color: black;
   text-decoration: none;
   padding: 14px;
   min-height: 70px;
@@ -132,12 +260,9 @@ body {
   padding: 16px;
 }
 
-.criar-pedido-page h1 {
-  background-color: #ddd;
-  padding: 10px 14px;
-  font-size: 22px;
-  font-weight: normal;
-  margin: 0 0 18px;
+.criar-pedido-page h1{
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .criar-pedido-form {
@@ -148,15 +273,31 @@ body {
 
 .criar-pedido-form label {
   font-size: 15px;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
 }
 
 .criar-pedido-form input,
 .criar-pedido-form textarea,
 .criar-pedido-form select {
-  border: none;
-  background-color: #ddd;
-  padding: 10px;
-  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.criar-pedido-form input::placeholder,
+.criar-pedido-form textarea::placeholder,
+.criar-pedido-form select::placeholder {
+  color: rgb(0, 0, 0);
+  font-style: normal;
+  font-family: Arial, sans-serif;
 }
 
 .criar-pedido-form textarea {
@@ -170,27 +311,42 @@ body {
   margin: 14px 0 4px;
 }
 
+.mapa-container {
+  padding: 24px 16px 32px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(158, 247, 168, 0.2);
+}
+
+.mapa-morada {
+  margin-right: 32px;
+}
+
+.mapa-morada label{
+  margin-top: 24px;
+}
+
+.morada-grande {
+  max-width: 500px;
+}
+
 .mapa-box {
-  background-color: #ddd;
   padding: 8px;
   border-radius: 8px;
+  flex: 1;
 }
 
 .criar-pedido-submit {
   margin-top: 12px;
-  background-color: #22a832;
+  background-color: rgb(34, 139, 34);
   color: white;
   border: none;
   padding: 12px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 16px;
+  margin-bottom: 16px;
   cursor: pointer;
-}
-
-.mensagem-pedido {
-  margin-top: 14px;
-  background-color: #ddd;
-  padding: 10px;
 }
 
 .pedidos-progresso-page {
@@ -213,7 +369,7 @@ body {
 }
 
 .voltar-btn {
-  background-color: #22a832;
+  background-color: rgb(34, 139, 34);
   color: white;
   text-decoration: none;
   padding: 9px 14px;
@@ -267,6 +423,7 @@ body {
 
 .acoes-box input {
   border: none;
+  border-radius: 8px;
   padding: 10px;
   background-color: white;
 }
@@ -275,7 +432,7 @@ body {
 .acao-vermelha {
   border: none;
   padding: 12px;
-  border-radius: 18px;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
   font-size: 15px;
@@ -299,7 +456,7 @@ body {
 }
 
 .acao-verde {
-  background-color: #22a832;
+  background-color: rgb(34, 139, 34);
 }
 
 .acao-vermelha {
@@ -312,27 +469,79 @@ body {
   margin-top: 15px;
 }
 
-.filtro-box input {
+.filtros-toggle-btn {
+  color: rgb(0, 0, 0);
+  padding: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  border: none;
   width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  margin-top: 8px;
+  background-color: rgb(255, 255, 255);
 }
 
-.filtros-toggle-btn {
+.filtros-toggle-container{
   width: 100%;
-  background-color: #22a832;
-  color: white;
   border: none;
-  padding: 12px;
-  border-radius: 18px;
-  font-size: 15px;
-  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   margin-bottom: 16px;
+}
+
+.filtros-toggle-btn:hover {
+  background-color: rgba(158, 247, 168, 0.2);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.accordion-content.open {
+  max-height: 1000px;
 }
 
 .filtros-expandidos {
   margin-bottom: 20px;
+}
+
+.pedidos-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pedidos-contagem{
+  background-color: rgba(158, 247, 168, 0.2);
+  color: rgb(34, 139, 34);
+  border-radius: 12px;
+  padding: 4px 8px;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.sem-pedidos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+img {
+  width: 200px;
+  height: auto;
+}
+
+.sem-pedidos-img {
+  margin-bottom: -32px;
+}
+
+.sem-pedidos text{
+  color: rgb(107, 107, 107);
 }

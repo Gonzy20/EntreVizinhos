@@ -62,6 +62,10 @@ export default function CriarPedido() {
   // Guarda mensagens de sucesso ou erro para mostrar ao utilizador
   const [mensagem, setMensagem] = useState("");
 
+  const [posicao, setPosicao] = useState<Coordenadas | null>(
+      coordenadas || null
+    );
+
   // Quando a página carrega, vai buscar as freguesias à API
   useEffect(() => {
     async function carregarFreguesias() {
@@ -279,41 +283,42 @@ export default function CriarPedido() {
 
   return (
     <>
-      {/* Cabeçalho da aplicação */}
-      <Header />
 
       <main className="criar-pedido-page">
-        <h1>Criar Pedido</h1>
+        <h1 className="morada-box">Criar Pedido</h1>
 
         {/* Formulário para criar um novo pedido */}
         <form onSubmit={criarPedido} className="criar-pedido-form">
-          <label>Titulo</label>
+          <label>Titulo:</label>
 
           {/* Input controlado pelo estado titulo*/}
           <input
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
+            placeholder="Titulo do pedido"
             required
           />
 
-        <label>Nome</label>
+        <label>Nome:</label>
           {/* Input controlado pelo estado nomePessoa */}
           <input
             value={nomePessoa}
             onChange={(e) => setNomePessoa(e.target.value)}
+            placeholder="Nome da pessoa"
             required
           />
 
-          <label>Descrição</label>
+          <label>Descrição:</label>
 
           {/* Textarea controlada pelo estado descricao */}
           <textarea
             value={descricao}
             onChange={(e) => setDescricao(e.target.value)}
+            placeholder="Descreve o que precisas"
             required
           />
 
-          <label>Freguesia</label>
+          <label>Freguesia:</label>
 
           {/* Select controlado pelo estado freguesiaId */}
           <select
@@ -331,25 +336,37 @@ export default function CriarPedido() {
             ))}
           </select>
 
-          <h2>Seleciona a localização no mapa</h2>
-
-          <div className="mapa-box">
+          <label>Seleciona a localização no mapa:</label>
+          <div className="mapa-container">
+            <div className="mapa-morada">
+            {/* Mostra a morada obtida automaticamente */}
+            {morada && (
+              <>
+                <label>Morada detetada:</label>
+                <p className="morada-grande">{morada}</p>
+              </>
+            )}
             {/* 
-              Componente do mapa.
-              Quando o utilizador escolhe um ponto no mapa,
-              o componente chama setCoordenadas e guarda lat/lng no estado.
+              Mostra latitude e longitude selecionadas
             */}
-            <MapaSelecionavel onSelecionarLocalizacao={onSelecionarLocalizacao} />
+            {posicao && (
+              <div style={{ marginTop: "10px" }}>
+                <label>Latitude:</label>
+                <p>{posicao.lat}</p>
+                <label>Longitude:</label>
+                <p>{posicao.lng}</p>
+              </div>
+            )}
+            </div>
+            <div className="mapa-box">
+              {/* 
+                Componente do mapa.
+                Quando o utilizador escolhe um ponto no mapa,
+                o componente chama setCoordenadas e guarda lat/lng no estado.
+              */}
+              <MapaSelecionavel onSelecionarLocalizacao={onSelecionarLocalizacao} posicao={posicao} setPosicao={setPosicao} />
+            </div>
           </div>
-
-          {/* Mostra a morada obtida automaticamente */}
-          {morada && (
-            <p className="mensagem-pedido">
-              <strong>Morada detetada:</strong>
-              <br />
-              {morada}
-            </p>
-          )}
 
           {/* Botão que submete o formulário */}
           <button type="submit" className="criar-pedido-submit">

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 // Importa Link para navegação entre páginas
 import Link from "next/link";
+import { IoArrowBackOutline } from "react-icons/io5";
+
 
 // Importa o cabeçalho da aplicação
 import Header from "@/components/Header";
@@ -55,25 +57,37 @@ export default function HistoricoPedidos() {
 
   return (
     <>
-      {/* Cabeçalho da aplicação */}
-      <Header />
 
       <main className="historico-page">
         {/* Topo da página */}
-        <section className="pagina-topo">
+        <section className="home-top">
           <h1>Histórico</h1>
 
           {/* Botão para voltar ao feed principal */}
-          <Link href="/" className="voltar-btn">
+          <Link href="/" className="criar-pedido-btn">
+            <IoArrowBackOutline className="icon-add"/>
             Voltar ao feed
           </Link>
         </section>
 
         {/* Lista de pedidos concluídos */}
-        <section className="pedidos-lista">
-          {/* Mensagem mostrada caso não existam pedidos concluídos */}
+        <section className="filtro-box">
+          <div className="pedidos-header">
+            <label>Pedidos Concluídos</label>
+            <text className="pedidos-contagem">{pedidos.length}</text>
+          </div>
+          {/* 
+            Se não existirem pedidos concluídos,
+            mostra esta mensagem.
+          */}
           {pedidos.length === 0 && (
-            <p>Não existem pedidos concluídos.</p>
+            <div className="sem-pedidos">
+              <div className="sem-pedidos-img">
+                <img src="/Sem_pedidos.svg" alt="Sem pedidos" />
+              </div> 
+              <label>Não existem pedidos concluídos.</label>
+              <text>Quando pedidos ficarem concluídos, eles aparecerão aqui.</text>
+            </div>
           )}
 
           {/* Percorre todos os pedidos concluídos */}

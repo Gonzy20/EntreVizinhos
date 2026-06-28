@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 // Importa Link para navegação entre páginas
 import Link from "next/link";
 
-// Importa o componente Header
-import Header from "@/components/Header";
+import { IoMdAdd } from "react-icons/io";
+import { IoSearchSharp } from "react-icons/io5";
+import { MdArrowForwardIos } from "react-icons/md";
 
 // Importa o componente dynamic, que depois vai ser utilizado na nova implementação do mapa
 import dynamic from "next/dynamic";
@@ -47,6 +48,12 @@ type Pedido = {
 
   // Estado do pedido (ativo, em progresso, concluído)
   estado: string;
+};
+
+// Define o formato das coordenadas escolhidas no mapa
+type Coordenadas = {
+  lat: number;
+  lng: number;
 };
 
 // Função com a formula para calcular a distância entre duas coordenadas.
@@ -99,6 +106,8 @@ export default function Home() {
     lat: number;
     lng: number;
   } | null>(null);
+
+  const [posicao, setPosicao] = useState<Coordenadas | null>(null);
   // null pois no inicio não tem localização escolhida
 
   // Guarda o raio escolhido em quilómetros
@@ -185,44 +194,64 @@ export default function Home() {
 
   return (
     <>
-      {/* Cabeçalho da aplicação */}
-      <Header />
 
       <main className="home-page">
         {/* Topo da página */}
         <section className="home-top">
-          <div className="morada-box">Feed de Pedidos</div>
-
+          <div className="home-top-text">
+            <h1 className="morada-box">Feed de Pedidos</h1>
+            <text>
+              Acompanhe e gerencie todos os seus pedidos.
+            </text>
+          </div>
           {/* Botão para criar novo pedido */}
           <Link href="/criar-pedido" className="criar-pedido-btn">
+            <IoMdAdd className="icon-add" />
             Criar Pedido
           </Link>
         </section>
 
         {/* Barra de pesquisa */}
         <section className="filtro-box">
-          <label>Pesquisar pedido</label>
-          <input
+          <label><IoSearchSharp className="icon" style={{color: "green"}}/>Pesquisar pedido</label>
+          <div className="pesquisa-box">
+            <IoSearchSharp className="icon"/>
+            <input
           type="text"
           placeholder="Pesquisar por título, nome ou descrição..."
           value={pesquisa}
           onChange={(e) => setPesquisa(e.target.value)}
           />
+          </div>
+          
           {/* Botão para mostrar / esconder filtros */}
-          <button
-            type="button"
-            className="filtros-toggle-btn"
-            onClick={() => setMostrarFiltros(!mostrarFiltros)}
-          >
-            {mostrarFiltros ? "Esconder filtros" : "Filtros"}
-          </button>
-        </section>
-
-        {mostrarFiltros && (
-          <div className="filtros-expandidos">
+          <div className="filtros-toggle-container">
+            <button
+              type="button"
+              className="filtros-toggle-btn"
+              onClick={() => setMostrarFiltros(prev => !prev)}
+              aria-expanded={mostrarFiltros}
+              aria-controls="filtros-panel"
+            >
+              <MdArrowForwardIos
+                className="icon"
+                style={{
+                  transform: mostrarFiltros ? "rotate(90deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s ease",
+                }}
+              />
+              Filtros
+            </button>
+            <div
+              id="filtros-panel"
+              className={`accordion-content ${
+                mostrarFiltros ? "open" : ""
+              }`}
+            >
+              <div className="filtros-expandidos">
             {/* Só mostra o filtro se existirem freguesias carregadas*/}
             {freguesias.length > 0 && (
-              <section className="filtro-box">
+              <section className="filtro-box-2">
                 <label>Filtrar por freguesia:</label>
 
                 <select
@@ -241,7 +270,7 @@ export default function Home() {
             )}
 
             {/* Filtro por proximidade */}
-            <section className="filtro-box">
+            <section className="filtro-box-2">
               <label>Filtrar por proximidade</label>
 
               <button
@@ -257,49 +286,68 @@ export default function Home() {
               </button>
 
               {usarFiltroProximidade && (
-                <>
-                  <label>Raio</label>
+                <div className="mapa-container">
+                  <div className="mapa-morada">
+                    <label>Seleciona no mapa a tua localização de referência</label>
+                    <label>Raio:</label>
 
-                  <select
-                    value={raioKm}
-                    onChange={(e) => setRaioKm(Number(e.target.value))}
-                  >
-                    <option value={1}>1 km</option>
-                    <option value={2}>2 km</option>
-                    <option value={5}>5 km</option>
-                    <option value={10}>10 km</option>
-                  </select>
+                    <select
+                      value={raioKm}
+                      onChange={(e) => setRaioKm(Number(e.target.value))}
+                    >
+                      <option value={1}>1 km</option>
+                      <option value={2}>2 km</option>
+                      <option value={5}>5 km</option>
+                      <option value={10}>10 km</option>
+                    </select>
+                    {localizacaoReferencia && (
+                      <>
+                        <label>
+                          Localização selecionada:
+                        </label>
+                        <p>
+                          {localizacaoReferencia.lat},{" "}
+                          {localizacaoReferencia.lng}
+                        </p>
+                      </>
+                    )}
 
-                  <p>Seleciona no mapa a tua localização de referência</p>
-
+                  </div>
                   <div className="mapa-box">
                     <MapaSelecionavel
-                      posicaoInicial={localizacaoReferencia}
+                      posicao={localizacaoReferencia}
+                      setPosicao={setPosicao}
                       onSelecionarLocalizacao={setLocalizacaoReferencia}
                     />
                   </div>
-
-                  {localizacaoReferencia && (
-                    <p>
-                      Localização selecionada: {localizacaoReferencia.lat},{" "}
-                      {localizacaoReferencia.lng}
-                    </p>
-                  )}
-                </>
+                </div>
               )}
             </section>
                   </div>
-                )}
+            </div>
+          </div>
+        </section>
 
         {/* Lista de pedidos */}
-        <section className="pedidos-lista">
+        <section className="filtro-box">
+          <div className="pedidos-header">
+            <label>Pedidos ativos</label>
+            <text className="pedidos-contagem">{pedidosFiltrados.length}</text>
+          </div>
+
           {/* 
             Caso não existam pedidos para mostrar,
             aparece esta mensagem
           */}
           {pedidosFiltrados.length === 0 && (
             //<p>Não existem pedidos ativos para esta freguesia.</p>
-            <p>Não existem pedidos ativos.</p>
+            <div className="sem-pedidos">
+              <div className="sem-pedidos-img">
+                <img src="/Sem_pedidos.svg" alt="Sem pedidos" />
+              </div> 
+              <label>Não existem pedidos ativos.</label>
+              <text>Quando novos pedidos forem criados, eles aparecerão aqui.</text>
+            </div>
           )}
 
           {/* 

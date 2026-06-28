@@ -152,8 +152,6 @@ export default function DetalhesPedido() {
   if (!pedido) {
     return (
       <>
-        <Header />
-
         <main className="detalhes-page">
           <p>A carregar...</p>
         </main>
@@ -163,11 +161,9 @@ export default function DetalhesPedido() {
 
   return (
     <>
-      {/* Cabeçalho da aplicação */}
-      <Header />
 
       <main className="detalhes-page">
-        <section className="detalhes-card">
+        <section className="filter-box">
 
           {/* Titulo do pedido */}
           <h1>{pedido.titulo}</h1>
@@ -175,53 +171,35 @@ export default function DetalhesPedido() {
           {/* Nome da pessoa que criou o pedido */}
           <p>{pedido.nomePessoa}</p>
 
-          <div className="detalhes-info">
-            <p>
-              <strong>Descrição:</strong>
-            </p>
+          <label>Descrição:</label>
 
-            {/* Descrição do pedido */}
-            <p>{pedido.descricao}</p>
-          </div>
+          {/* Descrição do pedido */}
+          <p>{pedido.descricao}</p>
 
-          <div className="detalhes-info">
-            <p>
-              <strong>Morada:</strong>
-            </p>
+          <label>Morada:</label>
 
-            {/* Morada obtida autaticamente a partir da localização selecionada */}
-            <p>{pedido.morada || "Morada não disponível"}</p>
-          </div>
+          {/* Morada obtida autaticamente a partir da localização selecionada */}
+          <p>{pedido.morada || "Morada não disponível"}</p>
 
-          <div className="detalhes-info">
-            <p>
-              <strong>Freguesia:</strong>
-            </p>
+          <label>Freguesia:</label>
 
-            {/* Freguesia e concelho associados ao pedido */}
-            <p>
-              {pedido.freguesia.nome} - {pedido.freguesia.concelho}
-            </p>
-          </div>
+          {/* Freguesia e concelho associados ao pedido */}
+          <p>
+            {pedido.freguesia.nome} - {pedido.freguesia.concelho}
+          </p>
 
-          <div className="detalhes-info">
-            <p>
-              <strong>Estado:</strong>
-            </p>
+          <label>Estado:</label>
 
-            {/* Estado atual do pedido */}
-            <p>{pedido.estado}</p>
-          </div>
+          {/* Estado atual do pedido */}
+          <p>{pedido.estado}</p>
 
           {/* Só mostra o ajudante se já existir um nome guardado */}
           {pedido.ajudanteNome && (
-            <div className="detalhes-info">
-              <p>
-                <strong>Ajudante:</strong>
-              </p>
+            <>
+              <label>Ajudante:</label>
 
               <p>{pedido.ajudanteNome}</p>
-            </div>
+            </>
           )}
 
           <div className="mapa-detalhes">
@@ -266,7 +244,7 @@ export default function DetalhesPedido() {
               <button onClick={concluirPedido} className="acao-verde">
                 Marcar como concluído
               </button>
-              
+
               <p>Não foi resolvido? Nos diga o ocorrido.</p>
 
               <textarea
@@ -286,9 +264,9 @@ export default function DetalhesPedido() {
             <Link
               href={`/pedidos/${pedido._id}/editar`}
               className="acao-azul"
-              >
-                Editar Pedido
-              </Link>
+            >
+              Editar Pedido
+            </Link>
 
             {/* Botão disponível para eliminar o pedido */}
             <button onClick={eliminarPedido} className="acao-vermelha">

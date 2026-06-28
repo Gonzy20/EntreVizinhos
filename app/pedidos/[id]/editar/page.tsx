@@ -263,15 +263,12 @@ export default function EditarPedido() {
 
   return (
     <>
-      {/* Cabeçalho da aplicação */}
-      <Header />
-
       <main className="criar-pedido-page">
         <h1>Editar Pedido</h1>
 
         {/* Formulário para editar o pedido */}
         <form onSubmit={editarPedido} className="criar-pedido-form">
-          <label>Título</label>
+          <label>Título:</label>
 
           {/* Input controlado pelo estado titulo */}
           <input
@@ -280,7 +277,7 @@ export default function EditarPedido() {
             required
           />
 
-          <label>Nome</label>
+          <label>Nome:</label>
 
           {/* Input controlado pelo estado nomePessoa */}
           <input
@@ -289,7 +286,7 @@ export default function EditarPedido() {
             required
           />
 
-          <label>Descrição</label>
+          <label>Descrição:</label>
 
           {/* Textarea controlada pelo estado descricao */}
           <textarea
@@ -298,7 +295,7 @@ export default function EditarPedido() {
             required
           />
 
-          <label>Freguesia</label>
+          <label>Freguesia:</label>
 
           {/* Select controlado pelo estado freguesiaId */}
           <select
@@ -306,7 +303,7 @@ export default function EditarPedido() {
             onChange={(e) => setFreguesiaId(e.target.value)}
             required
           >
-            <option value="">Seleciona uma freguesia</option>
+            <option value="">Seleciona uma freguesia:</option>
 
             {/* Cria uma opção para cada freguesia recebida da API */}
             {freguesias.map((freguesia) => (
@@ -316,7 +313,7 @@ export default function EditarPedido() {
             ))}
           </select>
 
-          <label>Estado</label>
+          <label>Estado:</label>
 
           {/* Select para editar o estado atual do pedido */}
           <select
@@ -328,26 +325,29 @@ export default function EditarPedido() {
             <option value="em_progresso">Em progresso</option>
             <option value="concluido">Concluído</option>
           </select>
-
-          <h2>Seleciona a nova localização no mapa</h2>
-
-          <div className="mapa-box">
-            {/* 
-              Mapa para escolher uma nova localização.
-              Ao clicar no mapa, atualiza as coordenadas do pedido.
-            */}
-            <MapaSelecionavel
-                posicaoInicial={coordenadas}
-                onSelecionarLocalizacao={onSelecionarLocalizacao}
-                />
+          <div className="mapa-container">
+            <div className="mapa-morada">
+              <label>Seleciona a nova localização no mapa</label>
+              {/* Mostra a morada */}
+              {morada && (
+                <>
+                  <label>Morada detetada:</label>
+                  <p className="morada-grande">{morada}</p>
+                </>
+              )}
+            </div>
+              <div className="mapa-box">
+                {/* 
+                  Mapa para escolher uma nova localização.
+                  Ao clicar no mapa, atualiza as coordenadas do pedido.
+                */}
+                <MapaSelecionavel
+                    posicao={coordenadas}
+                    setPosicao={setCoordenadas}
+                    onSelecionarLocalizacao={onSelecionarLocalizacao}
+                    />
+              </div>
           </div>
-
-          {/* Mostra a morada */}
-          {morada && (
-            <p className="mensagem-pedido">
-              Morada detetada: {morada}
-            </p>
-          )}
 
           {/* Botão que submete o formulário */}
           <button type="submit" className="criar-pedido-submit">
