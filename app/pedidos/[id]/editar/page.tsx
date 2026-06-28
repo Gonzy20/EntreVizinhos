@@ -342,8 +342,7 @@ export default function EditarPedido() {
                   Ao clicar no mapa, atualiza as coordenadas do pedido.
                 */}
                 <MapaSelecionavel
-                    posicao={coordenadas}
-                    setPosicao={setCoordenadas}
+                    posicaoInicial={coordenadas}
                     onSelecionarLocalizacao={onSelecionarLocalizacao}
                     />
               </div>
