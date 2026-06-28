@@ -364,7 +364,9 @@ export default function CriarPedido() {
                 Quando o utilizador escolhe um ponto no mapa,
                 o componente chama setCoordenadas e guarda lat/lng no estado.
               */}
-              <MapaSelecionavel onSelecionarLocalizacao={onSelecionarLocalizacao} posicao={posicao} setPosicao={setPosicao} />
+              <MapaSelecionavel
+                posicaoInicial={coordenadas}
+                onSelecionarLocalizacao={onSelecionarLocalizacao} />
             </div>
           </div>
 

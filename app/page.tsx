@@ -107,9 +107,6 @@ export default function Home() {
     lng: number;
   } | null>(null);
 
-  const [posicao, setPosicao] = useState<Coordenadas | null>(null);
-  // null pois no inicio não tem localização escolhida
-
   // Guarda o raio escolhido em quilómetros
   const [raioKm, setRaioKm] = useState(2);
   // useState 2 pois o raio começa a 2 km
@@ -315,8 +312,7 @@ export default function Home() {
                   </div>
                   <div className="mapa-box">
                     <MapaSelecionavel
-                      posicao={localizacaoReferencia}
-                      setPosicao={setPosicao}
+                      posicaoInicial={localizacaoReferencia}
                       onSelecionarLocalizacao={setLocalizacaoReferencia}
                     />
                   </div>
