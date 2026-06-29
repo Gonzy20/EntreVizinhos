@@ -1,37 +1,20 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
+import { BsLeaf } from "react-icons/bs";
+import { RxAvatar } from "react-icons/rx";
 
 export default function Header() {
-  const [menuAberto, setMenuAberto] = useState(false);
 
   return (
     <>
       <header className="header">
-        <button
-          className="menu-button"
-          onClick={() => setMenuAberto(!menuAberto)}
-        >
-          ☰
-        </button>
-
-        <h1>EntreVizinhos</h1>
-
+        <div className="logo-container">
+          <BsLeaf className="logo" />
+          <h1>EntreVizinhos</h1>
+        </div>
         <Link href="/perfil" className="profile-button">
-          ◯
+          <RxAvatar />
         </Link>
       </header>
-
-      {menuAberto && (
-        <nav className="side-menu">
-          <Link href="/">Página Principal</Link>
-          <Link href="/criar-pedido">Criar Pedido</Link>
-          <Link href="/pedidos-em-progresso">Pedidos em Progresso</Link>
-          <Link href="/historico">Histórico</Link>
-          <Link href="/perfil">Perfil</Link>
-        </nav>
-      )}
     </>
   );
 }
