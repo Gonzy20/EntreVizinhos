@@ -316,25 +316,42 @@ li {
   border-radius: 8px;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
   background-color: rgba(158, 247, 168, 0.2);
 }
 
 .mapa-morada {
-  margin-right: 32px;
+  flex: 1;
+  min-width: 280px;
 }
 
 .mapa-morada label{
   margin-top: 24px;
+  display: block;
+  font-weight: 650;
 }
 
 .morada-grande {
   max-width: 500px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.coordenadas-box {
+  margin-top: 24px;
+  font-size: 16px;
+}
+
+.coordenadas-box p {
+  margin: 8px 0;
 }
 
 .mapa-box {
   padding: 8px;
   border-radius: 8px;
-  flex: 1;
+  flex: 1.4;
+  min-width: 400px;
 }
 
 .criar-pedido-submit {

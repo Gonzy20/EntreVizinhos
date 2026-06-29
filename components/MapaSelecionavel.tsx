@@ -182,16 +182,7 @@ export default function MapaSelecionavel({
         )}
       </MapContainer>
 
-      {/* 
-        Mostra latitude e longitude selecionadas
-      */}
-      {posicao && (
-        <div style={{ marginTop: "10px" }}>
-          <p>Latitude: {posicao.lat}</p>
 
-          <p>Longitude: {posicao.lng}</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -62,10 +62,6 @@ export default function CriarPedido() {
   // Guarda mensagens de sucesso ou erro para mostrar ao utilizador
   const [mensagem, setMensagem] = useState("");
 
-  const [posicao, setPosicao] = useState<Coordenadas | null>(
-      coordenadas || null
-    );
-
   // Quando a página carrega, vai buscar as freguesias à API
   useEffect(() => {
     async function carregarFreguesias() {
@@ -349,12 +345,15 @@ export default function CriarPedido() {
             {/* 
               Mostra latitude e longitude selecionadas
             */}
-            {posicao && (
-              <div style={{ marginTop: "10px" }}>
-                <label>Latitude:</label>
-                <p>{posicao.lat}</p>
-                <label>Longitude:</label>
-                <p>{posicao.lng}</p>
+            {coordenadas && (
+              <div className="coordenadas-box">
+                <p>
+                  <strong>Latitude:</strong> {coordenadas.lat}
+                </p>
+
+                <p>
+                  <strong>Longitude:</strong> {coordenadas.lng}
+                </p>
               </div>
             )}
             </div>

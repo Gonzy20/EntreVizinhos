@@ -339,7 +339,6 @@ export default function Home() {
             //<p>Não existem pedidos ativos para esta freguesia.</p>
             <div className="sem-pedidos">
               <div className="sem-pedidos-img">
-                <img src="/Sem_pedidos.svg" alt="Sem pedidos" />
               </div> 
               <label>Não existem pedidos ativos.</label>
               <text>Quando novos pedidos forem criados, eles aparecerão aqui.</text>

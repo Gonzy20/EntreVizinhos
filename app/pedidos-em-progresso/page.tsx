@@ -82,7 +82,6 @@ export default function PedidosEmProgresso() {
           {pedidos.length === 0 && (
             <div className="sem-pedidos">
               <div className="sem-pedidos-img">
-                <img src="/Sem_pedidos.svg" alt="Sem pedidos" />
               </div> 
               <label>Não existem pedidos em progresso.</label>
               <text>Quando pedidos ficarem em progresso, eles aparecerão aqui.</text>

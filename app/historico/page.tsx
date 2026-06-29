@@ -83,7 +83,6 @@ export default function HistoricoPedidos() {
           {pedidos.length === 0 && (
             <div className="sem-pedidos">
               <div className="sem-pedidos-img">
-                <img src="/Sem_pedidos.svg" alt="Sem pedidos" />
               </div> 
               <label>Não existem pedidos concluídos.</label>
               <text>Quando pedidos ficarem concluídos, eles aparecerão aqui.</text>
